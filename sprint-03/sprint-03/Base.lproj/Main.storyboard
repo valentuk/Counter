@@ -64,11 +64,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="isCount" destination="4go-KL-ree" id="EH9-im-fnO"/>
-                        <outlet property="minusButton" destination="hj9-Ed-pL6" id="DhS-vk-xrC"/>
-                        <outlet property="plusButton" destination="8cF-Z4-xGg" id="Ri3-e3-4V3"/>
-                        <outlet property="refreshCount" destination="pCc-Gv-xd9" id="3WS-8p-IQe"/>
-                        <outlet property="viewHistory" destination="LGV-59-j9q" id="EeA-Ly-8zA"/>
+                        <outlet property="counterLabel" destination="4go-KL-ree" id="EH9-im-fnO"/>
+                        <outlet property="didTapMinus" destination="hj9-Ed-pL6" id="DhS-vk-xrC"/>
+                        <outlet property="didTapPlus" destination="8cF-Z4-xGg" id="Ri3-e3-4V3"/>
+                        <outlet property="historyTextView" destination="LGV-59-j9q" id="EeA-Ly-8zA"/>
+                        <outlet property="resetButton" destination="pCc-Gv-xd9" id="3WS-8p-IQe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

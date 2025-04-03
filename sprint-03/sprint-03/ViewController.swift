@@ -1,53 +1,62 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     var suranw: String = ""
     private var count: Int = 0
     
-    private func date() -> String {
-        var realdate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.YYYY" + "|" + "hh:mm:ss"
-        var datenow = dateFormatter.string(from: realdate)
-        return datenow
+    private func formattedDate() -> String {
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.YYYY" + " | " + "hh:mm:ss"
+        return formatter.string(from: currentDate)
+        
     }
     
-    @IBOutlet weak private var plusButton: UIButton!
-    @IBOutlet weak private var minusButton: UIButton!
-    @IBOutlet weak private var isCount: UILabel!
-    @IBOutlet weak private var refreshCount: UIButton!
-    @IBOutlet weak private var viewHistory: UITextView!
+    @IBOutlet weak private var didTapPlus: UIButton!
+    @IBOutlet weak private var didTapMinus: UIButton!
+    @IBOutlet weak private var counterLabel: UILabel!
+    @IBOutlet weak private var resetButton: UIButton!
+    @IBOutlet weak private var historyTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewHistory.isEditable = false
-        isCount.text = "\(count)"
-        plusButton.tintColor = .red
-        viewHistory.text = "История Изменений: \n"
+        historyTextView.isEditable = false
+        counterLabel.text = "\(count)"
+        didTapPlus.tintColor = .red
+        historyTextView.text = "История Изменений: \n"
+    }
+    
+    private func scrollToBottomOfTextView() {
+        let range = NSRange(location: historyTextView.text.count - 1, length: 1)
+        historyTextView.scrollRangeToVisible(range)
     }
     
     @IBAction private func didPlusButton(_ sender: Any) {
         count += 1
-        isCount.text = "\(count)"
-        viewHistory.text += "\(date()): Значение изменено на +1\n"
+        counterLabel.text = "\(count)"
+        historyTextView.text += "\(formattedDate()): Значение изменено на +1\n"
+        scrollToBottomOfTextView()
     }
     
     @IBAction private func didMinusButton(_ sender: Any) {
         if count > 0 {
             count -= 1
-            viewHistory.text += "\(date()): Значение изменено на -1\n"
+            historyTextView.text += "\(formattedDate()): Значение изменено на -1\n"
+            scrollToBottomOfTextView()
         } else  {
-            viewHistory.text += "\(date()): Попытка уменьшить значение счётчика ниже 0\n"
+            historyTextView.text += "\(formattedDate()): Попытка уменьшить значение счётчика ниже 0\n"
+            scrollToBottomOfTextView()
         }
-        isCount.text = "\(count)"
+        counterLabel.text = "\(count)"
         
     }
     
     @IBAction private func isRefreshCount(_ sender: Any) {
         count = 0
-        isCount.text = "\(count)"
-        viewHistory.text += "\(date()): Значение сброшено\n"
+        counterLabel.text = "\(count)"
+        historyTextView.text += "\(formattedDate()): Значение сброшено\n"
+        scrollToBottomOfTextView()
     }
 }
 
