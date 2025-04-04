@@ -2,23 +2,19 @@ import UIKit
 
 
 final class ViewController: UIViewController {
+    // MARK - Properties
     var suranw: String = ""
     private var count: Int = 0
     
-    private func formattedDate() -> String {
-        let currentDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.YYYY" + " | " + "hh:mm:ss"
-        return formatter.string(from: currentDate)
-        
-    }
-    
+
     @IBOutlet weak private var didTapPlus: UIButton!
     @IBOutlet weak private var didTapMinus: UIButton!
     @IBOutlet weak private var counterLabel: UILabel!
     @IBOutlet weak private var resetButton: UIButton!
     @IBOutlet weak private var historyTextView: UITextView!
     
+    
+    // MARK - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTextView.isEditable = false
@@ -27,11 +23,21 @@ final class ViewController: UIViewController {
         historyTextView.text = "История Изменений: \n"
     }
     
+    
+    // MARK - Setup Methods
     private func scrollToBottomOfTextView() {
         let range = NSRange(location: historyTextView.text.count - 1, length: 1)
         historyTextView.scrollRangeToVisible(range)
     }
     
+    private func formattedDate() -> String {
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.YYYY" + " | " + "hh:mm:ss"
+        return formatter.string(from: currentDate)
+    }
+    
+    // MARK - Actions
     @IBAction private func didPlusButton(_ sender: Any) {
         count += 1
         counterLabel.text = "\(count)"
